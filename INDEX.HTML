@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Battle Station</title>
+    <style>
+        :root { --neon-purple: #bc13fe; --deep-space: #05070a; --fortnite-blue: #007bff; --force-green: #00ffcc; }
+        body { background: var(--deep-space); color: white; font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        header { border-bottom: 3px solid var(--fortnite-blue); width: 100%; text-align: center; padding: 30px; box-shadow: 0 0 20px var(--fortnite-blue); background: rgba(0,0,0,0.8); }
+        .container { display: flex; flex-direction: column; gap: 30px; padding: 40px; width: 90%; max-width: 800px; }
+        .card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px; border: 1px solid var(--neon-purple); box-shadow: 0 0 15px rgba(188, 19, 254, 0.2); }
+        .search-box { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid var(--fortnite-blue); background: #111; color: white; font-size: 1.1rem; box-sizing: border-box; }
+        .btn { background: var(--fortnite-blue); color: white; padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 15px; width: 100%; transition: 0.3s; }
+        .btn:hover { background: var(--neon-purple); transform: scale(1.02); }
+        #result-display { margin-top: 25px; padding: 20px; border-left: 5px solid var(--force-green); background: rgba(0, 255, 204, 0.05); min-height: 50px; line-height: 1.6; }
+        .force-list { font-size: 0.8rem; color: #888; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>PHYSICS COMMAND CENTER</h1>
+    <p>Astrophysicist Explorer // Fortnite Gamer</p>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Force Interaction Search</h2>
+        <input type="text" id="calc-search" class="search-box" placeholder="Search: Gravity, Strong, Weak, or Electromagnetism...">
+        <div class="force-list">Calculates: Universal Gravitation, Coulomb's Law, and Force Ratios.</div>
+        <button class="btn" onclick="runPhysicsEngine()">INITIALISE CALCULATION</button>
+        
+        <div id="result-display">
+            > System Standby. Awaiting explorer input...
+        </div>
+    </div>
+
+    <div class="card" style="border-color: var(--fortnite-blue);">
+        <h2>Battle Station Logs</h2>
+        <p>Current Mission: Mapping the cosmic web while defending The Island.</p>
+        <p style="color: var(--fortnite-blue);">[Status: Victory Royale Potential High]</p>
+    </div>
+</div>
+
+<script>
+    const CONSTANTS = {
+        G: 6.67430e-11, // Gravitational Constant
+        k: 8.98755e9,   // Coulomb's Constant
+        hbar: 1.05457e-34 // Reduced Planck Constant
+    };
+
+    function runPhysicsEngine() {
+        const query = document.getElementById('calc-search').value.toLowerCase();
+        const display = document.getElementById('result-display');
+        let output = "";
+
+        if (query.includes("grav")) {
+            // Gravity Calculation (Example: Solar Mass + Earth Mass at 1AU)
+            const force = CONSTANTS.G * (1.989e30 * 5.972e24) / Math.pow(1.496e11, 2);
+            output = `<strong>FUNDAMENTAL FORCE: GRAVITY</strong><br>
+                      Theory: General Relativity / Newton's Law<br>
+                      Simulated Force (Sun-Earth): ${force.toExponential(4)} N<br>
+                      Range: Infinite`;
+        } 
+        else if (query.includes("electro")) {
+            // Electromagnetic Calculation (Example: Two electrons at 1nm)
+            const force = CONSTANTS.k * Math.pow(1.602e-19, 2) / Math.pow(1e-9, 2);
+            output = `<strong>FUNDAMENTAL FORCE: ELECTROMAGNETISM</strong><br>
+                      Theory: Quantum Electrodynamics (QED)<br>
+                      Repulsion Force (1nm): ${force.toExponential(4)} N<br>
+                      Relative Strength: 10^36 x Gravity`;
+        }
+        else if (query.includes("strong")) {
+            output = `<strong>FUNDAMENTAL FORCE: STRONG NUCLEAR</strong><br>
+                      Theory: Quantum Chromodynamics (QCD)<br>
+                      Range: ~1 femtometer<br>
+                      Note: Overcomes EM repulsion to hold nuclei together.`;
+        }
+        else if (query.includes("weak")) {
+            output = `<strong>FUNDAMENTAL FORCE: WEAK NUCLEAR</strong><br>
+                      Theory: Electroweak Theory<br>
+                      Action: Responsible for beta decay.<br>
+                      Mediators: W and Z bosons.`;
+        }
+        else {
+            output = "> Error: Force signature not recognised. Ensure syntax matches known physical constants.";
+        }
+
+        display.innerHTML = output;
+    }
+</script>
+
+</body>
+</html>
